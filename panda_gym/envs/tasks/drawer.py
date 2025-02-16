@@ -100,21 +100,21 @@ class Drawer(Task):
         }
         # The sliding drawer link.
         try:
-            drawer_state = self.sim.getLinkState(self.drawer_body_id,1)
-            #drawer_state = self.sim.get_link_state(self.drawer_name, "drawer")
+            drawer_position = self.sim.get_link_position(self.drawer_name, 1)
+            drawer_orientation = self.sim.get_link_orientation(self.drawer_name, 1)
             obs["drawer"] = {
-                "position": np.array(drawer_state[0]),
-                "orientation": np.array(drawer_state[1]),
+                "position": np.array(drawer_position),
+                "orientation": np.array(drawer_orientation),
             }
         except Exception:
             obs["drawer"] = {"position": np.zeros(3), "orientation": np.array([0, 0, 10, 1])}
         # The handle.
         try:
-            handle_state = self.sim.getLinkState(self.drawer_body_id,2)
-            #handle_state = self.sim.get_link_state(self.drawer_name, "handle")
+            handle_position = self.sim.get_link_position(self.drawer_name, 2)
+            handle_orientation = self.sim.get_link_orientation(self.drawer_name, 2)
             obs["handle"] = {
-                "position": np.array(handle_state[0]),
-                "orientation": np.array(handle_state[1]),
+                "position": np.array(handle_position),
+                "orientation": np.array(handle_orientation),
             }
         except Exception:
             obs["handle"] = {"position": np.zeros(3), "orientation": np.array([0, 0, 0, 1])}
