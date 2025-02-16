@@ -100,8 +100,8 @@ class Drawer(Task):
         }
         # The sliding drawer link.
         try:
-            drawer_position = self.sim.get_link_position(self.drawer_name, 1)
-            drawer_orientation = self.sim.get_link_orientation(self.drawer_name, 1)
+            drawer_position = self.sim.get_link_position(self.drawer_name, 0)
+            drawer_orientation = self.sim.get_link_orientation(self.drawer_name, 0)
             obs["drawer"] = {
                 "position": np.array(drawer_position),
                 "orientation": np.array(drawer_orientation),
@@ -110,8 +110,9 @@ class Drawer(Task):
             obs["drawer"] = {"position": np.zeros(3), "orientation": np.array([0, 0, 10, 1])}
         # The handle.
         try:
-            handle_position = self.sim.get_link_position(self.drawer_name, get_joint_index(self.sim, self.drawer_body_id, "handle"))
-            handle_orientation = self.sim.get_link_orientation(self.drawer_name, get_joint_index(self.sim, self.drawer_body_id, "handle"))
+            # get_joint_index(self.sim, self.drawer_body_id, "handle")
+            handle_position = self.sim.get_link_position(self.drawer_name, 1)
+            handle_orientation = self.sim.get_link_orientation(self.drawer_name, 1)
             obs["handle"] = {
                 "position": np.array(handle_position),
                 "orientation": np.array(handle_orientation),
