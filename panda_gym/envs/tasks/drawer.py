@@ -110,8 +110,8 @@ class Drawer(Task):
             obs["drawer"] = {"position": np.zeros(3), "orientation": np.array([0, 0, 10, 1])}
         # The handle.
         try:
-            handle_position = self.sim.get_link_position(self.drawer_name, 2)
-            handle_orientation = self.sim.get_link_orientation(self.drawer_name, 2)
+            handle_position = self.sim.get_link_position(self.drawer_name, get_joint_index(self.sim, self.drawer_body_id, "handle"))
+            handle_orientation = self.sim.get_link_orientation(self.drawer_name, get_joint_index(self.sim, self.drawer_body_id, "handle"))
             obs["handle"] = {
                 "position": np.array(handle_position),
                 "orientation": np.array(handle_orientation),
