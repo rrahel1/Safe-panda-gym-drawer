@@ -107,7 +107,7 @@ class Drawer(Task):
                 "orientation": np.array(drawer_state[1]),
             }
         except Exception:
-            obs["drawer"] = {"position": np.zeros(3), "orientation": np.array([0, 0, 0, 1])}
+            obs["drawer"] = {"position": np.zeros(3), "orientation": np.array([0, 0, 10, 1])}
         # The handle.
         try:
             handle_state = self.sim.getLinkState(self.drawer_body_id,2)
