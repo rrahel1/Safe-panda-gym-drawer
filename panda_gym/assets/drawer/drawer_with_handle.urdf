@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<robot name="drawer_with_handle">
+  <!-- Base: the fixed outer shell -->
+  <link name="base">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.4 0.3 0.2"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.4 0.3 0.2"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+  </link>
+
+  <!-- Drawer: the sliding part -->
+  <link name="drawer">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.35 0.25 0.1"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0.2 0.2 0.2 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.35 0.25 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.5"/>
+      <inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.05"/>
+    </inertial>
+  </link>
+
+  <!-- Handle: attached to the drawer such that it protrudes in negative y -->
+  <link name="handle">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.02" length="0.1"/>
+      </geometry>
+      <material name="silver">
+        <color rgba="0.7 0.7 0.7 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.02" length="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <!-- Prismatic joint for sliding the drawer out along the positive y direction -->
+  <joint name="drawer_slide" type="prismatic">
+    <parent link="base"/>
+    <child link="drawer"/>
+    <!-- The joint origin positions the drawer relative to the base.
+         Here the drawer slides along the positive y direction. -->
+    <origin xyz="0 0 0.05" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0" upper="0.15" effort="10.0" velocity="1.0"/>
+  </joint>
+
+  <!-- Fixed joint to attach the handle to the drawer.
+       The handle is offset in the negative y direction so that it protrudes from the drawer. -->
+  <joint name="handle_fixed" type="fixed">
+    <parent link="drawer"/>
+    <child link="handle"/>
+    <origin xyz="0 -0.18 0" rpy="0 0 0"/>
+  </joint>
+</robot>
+
