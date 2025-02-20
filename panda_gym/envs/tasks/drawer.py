@@ -64,6 +64,7 @@ class Drawer(Task):
             fileName=os.path.join(BASE_DIR, "assets/drawer/drawer_with_handle.urdf"),
             basePosition=self.drawer_position,
             useFixedBase=True,
+            flags = self.sim.URDF_USE_SELF_COLLISION,
         )
         # Now search for the body by name to get its unique ID.
         self.drawer_body_id = get_body_unique_id(self.sim, self.drawer_name)
