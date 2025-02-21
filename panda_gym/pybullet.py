@@ -402,6 +402,11 @@ class PyBullet:
 
         # create body
         self._bodies_idx[body_name] = urdf
+
+    def changeDynamics(self, object_id, link_index, lateral, rolling, spinning) -> None:
+        """Function to change dynamical properties of an object. Can potentially be adjusted"""
+        
+        self.physics_client.changeDynamics(object_id, link_index, lateralFriction=lateral, rollingFriction=rolling, spinningFriction=spinning) 
         
 
     def create_box(
