@@ -7,7 +7,7 @@
       <geometry>
         <box size="0.4 0.3 0.2"/>
       </geometry>
-      <material name="gray">
+      <material name="brown">
         <color rgba="0.5 0.5 0.5 1"/>
       </material>
     </visual>
@@ -31,7 +31,7 @@
       <geometry>
         <box size="0.35 0.25 0.1"/>
       </geometry>
-      <material name="black">
+      <material name="grey">
         <color rgba="0.2 0.2 0.2 1"/>
       </material>
     </visual>
@@ -53,7 +53,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.02" length="0.1"/>
+        <cylinder radius="0.02" length="0.06"/>
       </geometry>
       <material name="silver">
         <color rgba="0.7 0.7 0.7 1"/>
@@ -62,7 +62,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.02" length="0.1"/>
+        <cylinder radius="0.02" length="0.06"/>
       </geometry>
     </collision>
     <inertial>
@@ -78,8 +78,8 @@
     <child link="drawer"/>
     <!-- The joint origin positions the drawer relative to the base.
          Here the drawer slides along the positive y direction. -->
-    <origin xyz="0 -0.1 0.05" rpy="0 0 0"/>
-    <axis xyz="0 1 0"/>
+    <origin xyz="0 -0.055 0.03" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
     <limit lower="-0.4" upper="0.4" effort="1.0" velocity="1.0"/>
   </joint>
 
