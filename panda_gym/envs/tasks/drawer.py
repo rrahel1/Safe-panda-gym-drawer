@@ -70,7 +70,7 @@ class Drawer(Task):
         self.drawer_body_id = get_body_unique_id(self.sim, self.drawer_name)
 
         # Set lateral rolling and spinning friction for the handle
-        self.sim.changeDynamics(self.drawer_body_id, 1, 1.0, 1.0, 1.0)
+        self.sim.changeDynamics(self.drawer_body_id, 1, 10.0, 2.0, 2.0)
 
 
         if self.debug:
