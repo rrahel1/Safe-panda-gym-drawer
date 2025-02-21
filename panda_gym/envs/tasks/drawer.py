@@ -2,6 +2,7 @@ from typing import Any, Dict
 import os
 import numpy as np
 import pybullet as p
+import pybullet_utils.bullet_client as bc
 
 from panda_gym import BASE_DIR
 from panda_gym.envs.core_multi_task import Task
@@ -49,6 +50,8 @@ class Drawer(Task):
         self.drawer_position = drawer_position
         self.drawer_name = "drawer_with_handle"
 
+        self.physics_client = bc.BulletClient(connection_mode=self.connection_mode, options=options)
+
         with self.sim.no_rendering():
             self._create_scene()
             self.sim.place_visualizer(target_position=np.zeros(3), distance=0.9, yaw=45, pitch=-30)
@@ -70,10 +73,10 @@ class Drawer(Task):
         self.drawer_body_id = get_body_unique_id(self.sim, self.drawer_name)
 
         # Set friction for the handle
-        self.sim.changeDynamics(self.drawer_body_id, 1, lateralFriction=1.0)
+        self.physics_client.changeDynamics(self.drawer_body_id, 1, lateralFriction=1.0)
 
         # Optionally, set rolling and spinning friction
-        self.sim.changeDynamics(self.drawer_body_id, 1, rollingFriction=0.01, spinningFriction=0.01)
+        self.physics_client.changeDynamics(self.drawer_body_id, 1, rollingFriction=0.01, spinningFriction=0.01)
 
 
         if self.debug:
